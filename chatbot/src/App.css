@@ -6,32 +6,177 @@
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* More visually pleasing font */
 }
 
+/* Custom scrollbar styles */
+.chat-window::-webkit-scrollbar {
+  width: 8px; /* Width of the scrollbar */
+}
+
+.chat-window::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Color of the track */
+}
+
+.chat-window::-webkit-scrollbar-thumb {
+  background: #888; /* Color of the scrollbar thumb */
+}
+
+.chat-window::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Color of the scrollbar thumb on hover */
+}
+
+
 /* The overall app container */
 .app {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   height: 100vh;
   width: 100%;
 }
 
-/* The chat message window */
-.chat-window {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start; /* Align to the start */
-  flex: 1;
-  padding: 20px;
+/* Side Menu styles */
+.side-menu {
+  width: 17%;
+  background-color: #f0f0f0;
+  padding: 10px;
+  height: 100vh;
   overflow-y: auto;
-  background-color: white; /* Background color */
+  display: flex;
+  flex-direction: column; /* Stack items vertically */
+  align-items: flex-start; /* Align items to the start */
 }
 
+.side-menu p{
+  padding: 8px 16px; /* Padding to match the menu item layout */
+  margin: 8px 0; /* Spacing between items */
+  white-space: nowrap; /* Ensure text doesn't wrap */
+  overflow: hidden; /* Hide overflow */
+  text-overflow: ellipsis; /* Add ellipsis to text that's too long */
+  cursor: pointer; /* Change cursor to indicate interactivity */
+}
+
+.logo-text{
+  font-weight: bold; /* Make the text bold */
+  font-size: 18px; /* Increase the font size */
+  margin-bottom: 10px; /* Optional: Adjust the margin bottom */
+}
+
+.title1 {
+  opacity: 70%;
+  font-size: small;
+  font-weight: bold;
+}
+
+/* Highlighted menu item */
+.side-menu p.active{
+  background-color: #dcdcdc; /* Highlight color */
+}
+
+/* Adjust earlier-protocols */
+.earlier-protocols {
+  padding: 10px 0;
+  margin-top: 20px;
+}
+
+.earlier-protocols p.active {
+  background-color: #dcdcdc; /* Highlight color */
+  border-radius: 1  0px; /* Rounded corners */
+}
+
+.company-details {
+    /* Add border properties to create a thin border */
+    border: 1px solid #ccc; /* Thin solid border with a light grey color */
+    padding: 10px; /* Add padding for better visual appearance */
+    margin-top: 20%; /* Add margin-top to separate from other content */
+    border-radius: 20px;
+    width: calc(100% - 20px);
+}
+
+.dark-mode {
+  margin-top: 20px; /* Increase the margin-top to move the paragraph further down */  
+  font-size: 16px; /* Optionally adjust the font size */
+}
+
+/* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+  margin-left: 5%;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2b3e59;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2b3e59;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+
+.chat-container {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 50px;
+}
+
+/* The chat message window */
 .message {
   display: flex;
   flex-direction: column; /* Stack icon/name and message text vertically */
   align-items: flex-start; /* Align items to the start */
   margin-bottom: 12px;
-  width: 70%;
-  margin-left: 30%; /* Adjust this value as needed to move messages to the right */
+  width: 50%;
+  margin-left: 20%; /* Adjust this value as needed to move messages to the right */
+  max-width: 50%; /* Make sure the message doesn't exceed the width of its container */
+  word-wrap: break-word;
 }
 
 /* Message header with icon and name on the same line */
@@ -57,23 +202,41 @@
   margin-left: 32px; /* Indent to the right of the icon and name */
   font-size: 1.1em; /* Larger font size */
   margin-top: 5px; /* Add some space between the name and message */
+  word-break: break-word;
 }
 
-/* User input area */
-.user-input {
-  display: flex;
-  justify-content: center; /* Center the input area */
-  padding: 10px;
-  background: white;
-  border-top: 1px solid #ccc;
+.message.bot {
+  background-color: #f5f4f4; /* Light grey background color */
+  padding: 8px 12px; /* Optional: Add padding to improve visual appearance */
+  border-radius: 10px; /* Optional: Add border radius for rounded corners */
 }
 
-/* The text input container to control width */
+.message.user {
+  word-wrap: break-word;
+}
+
+/* The text input */
+.user-input input {
+  flex-grow: 1; /* Allows input to grow to available space */
+  padding: 10px 15px; /* Adjust padding to ensure text is vertically centered */
+  font-size: 18px; /* Larger font size for better readability */
+  width: auto; /* Auto width to only take up necessary space */
+  max-width: 80%; /* Less width, you can adjust the percentage as needed */
+  margin-right: 10px; /* Keep the margin to separate input from button */
+  border: 2px solid #ccc;
+  border-radius: 18px;
+  outline: none;
+}
+
+/* The text input container to control width, if needed */
 .user-input-container {
   display: flex;
-  width: 60%; /* Set width to 60% */
+  width: 100%; /* Set width to 100% to fill the parent */
+  max-width: 600px; /* Maximum width, adjust as needed */
   align-items: center;
+  margin: 0 auto; /* Center the input container if it's less than 100% */
 }
+
 
 /* The text input */
 .user-input input {
@@ -90,7 +253,7 @@
   padding: 10px 20px;
   border: none;
   border-radius: 18px;
-  background-color: #007bff;
+  background-color: #2b3e59;
   color: white;
   font-size: 16px;
   cursor: pointer;
@@ -109,6 +272,16 @@
 }
 
 .chat-window {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  overflow-y: auto; /* This will show a scrollbar when the content overflows */
+  height: calc(100vh - 60px); /* Adjust if your UserInput has a different height */
+  position: relative;
+}
+
+
+html, body {
+  height: 100%;
+  margin: 0;
 }

@@ -17,7 +17,7 @@ function UserInput({ onSendMessage }) {
             type="text"
             value={message}
             onChange={(e) => setMessage(e.target.value)}
-            placeholder="Type your message here..."
+            placeholder="Start med å skrive inn hva du vil gjøre"
             onKeyPress={(e) => e.key === 'Enter' && handleSubmit(e)} // Handle the Enter key press
           />
         <button type="submit" onClick={handleSubmit}>Send</button>
